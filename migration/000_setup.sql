@@ -1,0 +1,5 @@
+CREATE USER crawler WITH PASSWORD 'crawler';
+ALTER ROLE crawler SUPERUSER CREATEDB;
+
+CREATE DATABASE moviecrawler;
+GRANT ALL PRIVILEGES ON DATABASE moviecrawler TO crawler;
