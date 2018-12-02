@@ -1,8 +1,12 @@
 package main
 
 import (
+	"moviecrawler/crawler"
+	"moviecrawler/handler"
 	"moviecrawler/model"
+	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
 
@@ -14,19 +18,20 @@ func init() {
 }
 
 func main() {
-	ms := &MovieState{
-		VisitedPage: make(chan string),
-		IsVisited:   make(chan StateRequest),
-		visited:     make(map[string]struct{}),
-	}
-
-	go ms.serve()
-
 	_, err := model.InitPSQLConnection()
 	if err != nil {
 		logrus.Error(err)
 		return
 	}
 
-	crawl(src, ms)
+	go crawler.Crawl()
+
+	r := mux.NewRouter()
+	r.Handle("/api/movies/year/{year}/", handler.NewMovieListByYearHandler())
+
+	logrus.Info("http server is listening and serving on 8000")
+	s := &http.Server{Addr: ":8000", Handler: r}
+	if err := s.ListenAndServe(); err != nil {
+		panic(err)
+	}
 }

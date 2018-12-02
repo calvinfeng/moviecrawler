@@ -19,6 +19,17 @@ type Movie struct {
 	Link        string    `gorm:"column:link"         json:"link"`
 }
 
+// ListMovieByYear returns movies from a given year.
+func ListMovieByYear(year string) ([]*Movie, error) {
+	result := []*Movie{}
+
+	if err := PSQL.Where("release_year = ?", year).Order("imdb_rating DESC").Find(&result).Error; err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
 // TableName explicitly tells the ORM where to look for the table for this row.
 func (Movie) TableName() string {
 	return "movies"

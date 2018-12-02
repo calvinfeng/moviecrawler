@@ -50,6 +50,18 @@
   version = "v1.2.0"
 
 [[projects]]
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+  version = "v1.1.1"
+
+[[projects]]
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
+  version = "v1.6.2"
+
+[[projects]]
   name = "github.com/jinzhu/gorm"
   packages = [".","dialects/postgres"]
   revision = "472c70caa40267cb89fd8facb07fe6454b578626"
@@ -130,6 +142,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "02546a716e08cd0f4db0247910ce29c4412de23c1d9a2aad9ddc19f512679c79"
+  inputs-digest = "75ec20bef1c0556173dad8318eca0bfbfa7f9a9edf49847b1c7fd305225006be"
   solver-name = "gps-cdcl"
   solver-version = 1
